@@ -19,8 +19,14 @@ public class InvincibilityController : MonoBehaviour
 
     private IEnumerator InvincibilityCoroutine(float invincibilityDuration)
     {
+        // Armor
         takeDamageController.IsInvincible = true;
         yield return new WaitForSeconds(invincibilityDuration);
         takeDamageController.IsInvincible = false;
+
+        //Health
+        healthController.IsInvincible = true;
+        yield return new WaitForSeconds(invincibilityDuration);
+        healthController.IsInvincible = false;
     }
 }

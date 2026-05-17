@@ -9,6 +9,12 @@ public class Health : MonoBehaviour
     [SerializeField]
     public float currentHealth;
 
+    public bool IsInvincible { get; set; }
+
+    public UnityEvent OnDied;
+    public UnityEvent OnDamaged;
+    public UnityEvent OnHealthChanged;
+
     public float RemainingHealthPercentage
     {
         get
@@ -23,10 +29,26 @@ public class Health : MonoBehaviour
         {
             return;
         }
+
+        if (IsInvincible)
+        {
+            return;
+        }
+
         currentHealth -= damageAmount;
+        OnHealthChanged.Invoke();
         if (currentHealth < 0)
         {
             currentHealth = 0;
+        }
+
+        if (currentHealth == 0)
+        {
+            OnDied.Invoke();
+        }
+        else
+        {
+            OnDamaged.Invoke();
         }
     }
 
@@ -37,6 +59,7 @@ public class Health : MonoBehaviour
             return;
         }
         currentHealth += amountToAdd;
+        OnHealthChanged.Invoke();
         if
         (currentHealth > maxHealth)
             currentHealth = maxHealth;

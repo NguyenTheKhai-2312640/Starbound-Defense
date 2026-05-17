@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void TogglePause()
+    public void TogglePause()
     {
         if (Time.timeScale > 0)
         {

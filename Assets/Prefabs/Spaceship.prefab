@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 4535774609825897571}
   - component: {fileID: 5411843805515192252}
   - component: {fileID: 4253797419379596977}
-  - component: {fileID: 4487346086628896126}
+  - component: {fileID: 1706179687796546219}
   - component: {fileID: 395651935788386688}
   - component: {fileID: 9004065978715924062}
+  - component: {fileID: 4089372171875827106}
+  - component: {fileID: 1163820478695739629}
   m_Layer: 7
   m_Name: Spaceship
   m_TagString: Safeplace
@@ -31,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -77,10 +79,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -254858091
+  m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -712631045867808456, guid: b670ab75dde984907b8570040daa08c5, type: 3}
+  m_Sprite: {fileID: 7851470227991654557, guid: 8f6e591e09a7baa469c74773ff050af2, type: 3}
   m_Color: {r: 0, g: 1, b: 0.9634645, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -118,8 +120,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!70 &4487346086628896126
-CapsuleCollider2D:
+--- !u!58 &1706179687796546219
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -152,9 +154,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.011624068}
-  m_Size: {x: 0.8450122, y: 0.86826044}
-  m_Direction: 0
+  m_Offset: {x: -0.01309371, y: 0}
+  m_Radius: 1.8748591
 --- !u!114 &395651935788386688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,6 +170,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 100
+  OnDied:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDamaged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4089372171875827106}
+        m_TargetAssemblyTypeName: PlaceDamagedInvincibility, Assembly-CSharp
+        m_MethodName: StartInvincibility
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UIUpdater, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 395651935788386688}
+          m_ObjectArgumentAssemblyTypeName: Health, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &9004065978715924062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,5 +213,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6382f8228a2edea48a54802b7e453189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4089372171875827106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2465397543596825161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68ac9816e01ed0d4cb34d6cb576e2bf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  invincibilityDuration: 3
+--- !u!114 &1163820478695739629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2465397543596825161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4a795b25a7f9774ab155ddc4b429010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
