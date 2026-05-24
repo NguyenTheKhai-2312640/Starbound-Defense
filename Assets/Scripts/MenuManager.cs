@@ -3,6 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+
+    public GameObject mainMenuPanel;
+    public GameObject settingsPanel;
+
+   
     // Pause menu
     [SerializeField] GameObject pausePanel;
     public void Pause()
@@ -39,6 +44,17 @@ public class MenuManager : MonoBehaviour
     public void Setting()
     {
 
+    }
+     public void OpenSettings()
+    {
+        mainMenuPanel.SetActive(false);
+        settingsPanel.SetActive(true);
+    }
+
+    public void CloseSettings()
+    {
+        settingsPanel.SetActive(false);
+        mainMenuPanel.SetActive(true);
     }
 
     public void Credit()
