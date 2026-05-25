@@ -7,6 +7,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject losePanel;
+
+
     // Pause menu
     public void Pause()
     {
@@ -39,6 +41,8 @@ public class MenuManager : MonoBehaviour
     [Header("MainMenu UI Panels")]
     // Main menu
     [SerializeField] private GameObject creditPanel;
+    public GameObject mainMenuPanel;
+    public GameObject settingsPanel;
     public void NewGame()
     {
         SceneManager.LoadScene("Test");
@@ -48,6 +52,17 @@ public class MenuManager : MonoBehaviour
     public void Setting()
     {
 
+    }
+     public void OpenSettings()
+    {
+        mainMenuPanel.SetActive(false);
+        settingsPanel.SetActive(true);
+    }
+
+    public void CloseSettings()
+    {
+        settingsPanel.SetActive(false);
+        mainMenuPanel.SetActive(true);
     }
 
     public void Credit()
