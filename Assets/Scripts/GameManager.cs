@@ -3,8 +3,12 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     float previousTimeScale = 1;
-    public GameObject pausePanel; // UI
+    [Header("UI Panels")]
+    [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject winPanel;
+    [SerializeField] private GameObject losePanel;
     public static bool isPaused;
+    public static bool gameEnded;
 
     void Update()
     {
@@ -31,5 +35,25 @@ public class GameManager : MonoBehaviour
             pausePanel.SetActive(false);
             isPaused = false;
         }
+    }
+
+    public void WinGame()
+    {
+        previousTimeScale = Time.timeScale;
+        Time.timeScale = 0;
+        AudioListener.pause = true;
+
+        winPanel.SetActive(true);
+        gameEnded = true;
+    }
+
+    public void LoseGame()
+    {
+        previousTimeScale = Time.timeScale;
+        Time.timeScale = 0;
+        AudioListener.pause = true;
+
+        losePanel.SetActive(true);
+        gameEnded = true;
     }
 }

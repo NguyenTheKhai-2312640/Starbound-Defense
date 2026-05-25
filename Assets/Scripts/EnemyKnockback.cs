@@ -9,8 +9,8 @@ public class EnemyKnockback : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<PlayerMovement>())
         {
-            var healthController = collision.gameObject.GetComponent<PlayerArmor>();
-            healthController.TakeDamage(damageAmount);
+            var armorController = collision.gameObject.GetComponent<PlayerArmor>();
+            armorController.TakeDamage(damageAmount);
         }
     }
 }

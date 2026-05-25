@@ -3,13 +3,11 @@ using UnityEngine;
 
 public class InvincibilityController : MonoBehaviour
 {
-    private Health healthController;
     private PlayerArmor takeDamageController;
 
     private void Awake()
     {
         takeDamageController = GetComponent<PlayerArmor>();
-        healthController = GetComponent<Health>();
     }
 
     public void StartInvincibility(float invincibilityDuration)
@@ -21,12 +19,9 @@ public class InvincibilityController : MonoBehaviour
     {
         // Armor
         takeDamageController.IsInvincible = true;
-        yield return new WaitForSeconds(invincibilityDuration);
-        takeDamageController.IsInvincible = false;
 
-        //Health
-        healthController.IsInvincible = true;
         yield return new WaitForSeconds(invincibilityDuration);
-        healthController.IsInvincible = false;
+
+        takeDamageController.IsInvincible = false;
     }
 }

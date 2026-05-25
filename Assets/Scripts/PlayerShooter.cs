@@ -48,7 +48,9 @@ public class PlayerShooter : MonoBehaviour
         if (Input.GetMouseButton(0) && canShoot)
         {
             canShoot = false;
-            Instantiate(bulletPrefab, gunOffset.position, rotationPoint.rotation);
+            GameObject bullet = Instantiate(bulletPrefab, gunOffset.position, rotationPoint.rotation);
+
+            bullet.GetComponent<BulletScript>().SetSpeed(bulletSpeed);
         }
     }
 }

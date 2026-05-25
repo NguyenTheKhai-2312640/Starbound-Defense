@@ -3,8 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    [Header("Pause UI Panels")]
+    [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject winPanel;
+    [SerializeField] private GameObject losePanel;
     // Pause menu
-    [SerializeField] GameObject pausePanel;
     public void Pause()
     {
         pausePanel.SetActive(true);
@@ -28,12 +31,18 @@ public class MenuManager : MonoBehaviour
         Time.timeScale = 1;
         pausePanel.SetActive(false);
         GameManager.isPaused = false;
+        winPanel.SetActive(false);
+        losePanel.SetActive(false);
+        GameManager.gameEnded = false;
     }
 
+    [Header("MainMenu UI Panels")]
     // Main menu
+    [SerializeField] private GameObject creditPanel;
     public void NewGame()
     {
         SceneManager.LoadScene("Test");
+        Time.timeScale = 1;
     }
 
     public void Setting()
@@ -43,7 +52,12 @@ public class MenuManager : MonoBehaviour
 
     public void Credit()
     {
+        creditPanel.SetActive(true);
+    }
 
+    public void Back()
+    {
+        creditPanel.SetActive(false);
     }
 
     public void Quit()

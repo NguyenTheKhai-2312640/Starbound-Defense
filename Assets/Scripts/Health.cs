@@ -8,6 +8,7 @@ public class Health : MonoBehaviour
     public float maxHealth;
     [SerializeField]
     public float currentHealth;
+    [SerializeField] private GameManager gameManager;
 
     public bool IsInvincible { get; set; }
 
@@ -37,6 +38,7 @@ public class Health : MonoBehaviour
 
         currentHealth -= damageAmount;
         OnHealthChanged.Invoke();
+
         if (currentHealth < 0)
         {
             currentHealth = 0;
@@ -45,6 +47,7 @@ public class Health : MonoBehaviour
         if (currentHealth == 0)
         {
             OnDied.Invoke();
+            gameManager.LoseGame();
         }
         else
         {
@@ -58,8 +61,10 @@ public class Health : MonoBehaviour
         {
             return;
         }
+
         currentHealth += amountToAdd;
         OnHealthChanged.Invoke();
+
         if
         (currentHealth > maxHealth)
             currentHealth = maxHealth;

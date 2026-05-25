@@ -2,17 +2,27 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
+    [SerializeField] private float bulletDamage;
     private Vector3 mousePos;
     private Camera mainCam;
     private Rigidbody2D rb;
+    private Enemy enemy;
     public float force;
+
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         // Nếu trúng enemy
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Destroy(collision.gameObject); // hủy enemy
+            enemy = collision.gameObject.GetComponent<Enemy>();
+
+            if (enemy != null)
+            {
+                enemy.TakeDamage(bulletDamage);
+            }
+            
+            // Destroy(collision.gameObject); // hủy enemy
             Destroy(gameObject); // hủy bullet
         }
         else
@@ -45,5 +55,10 @@ public class BulletScript : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void SetSpeed(float bulletSpeed)
+    {
+        force = bulletSpeed;
     }
 }

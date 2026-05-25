@@ -5,6 +5,7 @@ public class TimerCountdown : MonoBehaviour
 {
     public TextMeshProUGUI timeText;
     [SerializeField] public float countDownTime;
+    [SerializeField] private GameManager gameManager;
     private float currentTime;
     private bool isCounting = true;
 
@@ -47,6 +48,6 @@ public class TimerCountdown : MonoBehaviour
 
     void Feature()
     {
-        
+        gameManager.WinGame();
     }
 }
