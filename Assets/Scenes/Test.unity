@@ -2458,6 +2458,9 @@ MonoBehaviour:
   pausePanel: {fileID: 2122967264}
   winPanel: {fileID: 664858291}
   losePanel: {fileID: 216419776}
+  creditPanel: {fileID: 0}
+  mainMenuPanel: {fileID: 0}
+  settingsPanel: {fileID: 0}
 --- !u!4 &1114452271
 Transform:
   m_ObjectHideFlags: 0
@@ -3862,6 +3865,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9004065978715924062, guid: 8398f90b97d35544cb2a8a0826b32bea, type: 3}
+      propertyPath: playerSprite
+      value: 
+      objectReference: {fileID: 872953858}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3954,6 +3961,7 @@ GameObject:
   - component: {fileID: 1961287347}
   - component: {fileID: 1961287349}
   - component: {fileID: 1961287350}
+  - component: {fileID: 1961287351}
   m_Layer: 0
   m_Name: SpawnPoint
   m_TagString: Untagged
@@ -4022,6 +4030,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 5070562871364067835, guid: 4ccbab5b90dd0b34a96ca9919ccc77d1, type: 3}
   spawnRate: 12
+  spawnDistance: 10
+  timeSinceLastSpawn: 0
+--- !u!114 &1961287351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1961287346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 819ffe7ffd4fb9f448542b15ef638aa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 9137030898422080984, guid: 660df3efb8e5ad844be5dc2449e34871, type: 3}
+  spawnRate: 6
   spawnDistance: 10
   timeSinceLastSpawn: 0
 --- !u!1 &1991396929

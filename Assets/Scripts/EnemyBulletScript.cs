@@ -1,28 +1,31 @@
 using UnityEngine;
 
-public class BulletScript : MonoBehaviour
+public class EnemyBulletScript : MonoBehaviour
 {
     [SerializeField] private float bulletDamage;
-    private Vector3 mousePos;
+    private GameObject player;
     private Camera mainCam;
     private Rigidbody2D rb;
-    private Enemy enemy;
+    private PlayerArmor playerArmor;
     public float force;
-
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // Nếu trúng enemy
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            enemy = collision.gameObject.GetComponent<Enemy>();
+            return; // bỏ qua enemy
+        }
+        
+        // Nếu trúng player
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playerArmor = collision.gameObject.GetComponent<PlayerArmor>();
 
-            if (enemy != null)
+            if (playerArmor != null)
             {
-                enemy.TakeDamage(bulletDamage);
+                playerArmor.TakeDamage(bulletDamage);
             }
-            
-            // Destroy(collision.gameObject); // hủy enemy
+
             Destroy(gameObject); // hủy bullet
         }
         else
@@ -38,13 +41,12 @@ public class BulletScript : MonoBehaviour
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 
         rb = GetComponent<Rigidbody2D>();
-        mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
+        player = GameObject.FindGameObjectWithTag("Player");
 
-        Vector3 direction = mousePos - transform.position;
-        Vector3 rotation = transform.position - mousePos;
+        Vector3 direction = player.transform.position - transform.position;
         rb.linearVelocity = new Vector2(direction.x, direction.y).normalized * force;
-        
-        float rot = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
+
+        float rot = Mathf.Atan2(-direction.y, -direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rot + 90);
     }
 
@@ -60,8 +62,5 @@ public class BulletScript : MonoBehaviour
         }
     }
 
-    public void SetSpeed(float bulletSpeed)
-    {
-        force = bulletSpeed;
-    }
+
 }

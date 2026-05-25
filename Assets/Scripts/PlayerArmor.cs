@@ -8,8 +8,11 @@ public class PlayerArmor : MonoBehaviour
     public float maxArmor;
     [SerializeField]
     public float currentArmor;
+    [SerializeField]
+    private PlayerSpawner playerSpawner;
 
     public bool IsInvincible { get; set; }
+    private bool isBroken = false;
 
     public UnityEvent OnDied;
     public UnityEvent OnDamaged;
@@ -25,7 +28,7 @@ public class PlayerArmor : MonoBehaviour
 
     public void TakeDamage(float damageAmount)
     {
-        if (currentArmor == 0)
+        if (currentArmor <= 0)
         {
             return;
         }
@@ -42,16 +45,38 @@ public class PlayerArmor : MonoBehaviour
         {
             currentArmor = 0;
         }
-        
-        if (currentArmor == 0)
+
+        if (currentArmor == 0 && !isBroken)
         {
-            OnDied.Invoke();
+            isBroken = true;
+
+            //OnDied.Invoke();
+
+            Debug.Log("PLAYER DIED");
+
+            if (playerSpawner != null)
+            {
+                playerSpawner.RespawnPlayer();
+            }
+            else
+            {
+                Debug.LogWarning("PlayerSpawn is NULL");
+            }
+            Debug.Log("PLACE START");
+
         }
         else
         {
             OnDamaged.Invoke();
         }
 
+    }
+
+    public void ReviveFull()
+    {
+        isBroken = false;
+        currentArmor = maxArmor;
+        OnHealthChanged.Invoke();
     }
 
     public void AddHealth(float amountToAdd)

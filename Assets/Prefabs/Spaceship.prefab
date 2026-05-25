@@ -242,6 +242,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6382f8228a2edea48a54802b7e453189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeText: {fileID: 0}
+  coolDownTime: 10
+  startPos: {x: 0, y: 0}
+  playerSprite: {fileID: 5152824140374375665, guid: 36c762014f5ceec41905baccecf89f2a, type: 3}
 --- !u!114 &395651935788386688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,8 +258,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b100439ae5cc4146b30044bfe06063e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1000
-  currentHealth: 1000
+  maxHealth: 5000
+  currentHealth: 5000
   gameManager: {fileID: 0}
   OnDied:
     m_PersistentCalls:
