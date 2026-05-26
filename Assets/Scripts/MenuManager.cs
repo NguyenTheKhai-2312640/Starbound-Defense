@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+
     [Header("Pause UI Panels")]
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject winPanel;
@@ -17,12 +18,19 @@ public class MenuManager : MonoBehaviour
 
     public void Home()
     {
+        Time.timeScale = 1;
+        AudioListener.pause = false;
+        
+        GameManager.isPaused = false;
+        GameManager.gameEnded = false;
+
         SceneManager.LoadScene("Menu");
     }
 
     public void Resume()
     {
         Time.timeScale = 1;
+        AudioListener.pause = false;
         pausePanel.SetActive(false);
         GameManager.isPaused = false;
     }
@@ -31,6 +39,7 @@ public class MenuManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1;
+        AudioListener.pause = false;
         pausePanel.SetActive(false);
         GameManager.isPaused = false;
         winPanel.SetActive(false);
@@ -58,8 +67,7 @@ public class MenuManager : MonoBehaviour
     // Main menu
     [SerializeField] private GameObject creditPanel;
     [SerializeField] private GameObject helpPanel;
-    public GameObject mainMenuPanel;
-    public GameObject settingsPanel;
+    [SerializeField] public GameObject settingsPanel;
     public void NewGame()
     {
         SceneManager.LoadScene("Test");
@@ -82,14 +90,12 @@ public class MenuManager : MonoBehaviour
     }
     public void OpenSettings()
     {
-        mainMenuPanel.SetActive(false);
         settingsPanel.SetActive(true);
     }
 
     public void CloseSettings()
     {
         settingsPanel.SetActive(false);
-        mainMenuPanel.SetActive(true);
     }
 
     public void Credit()
