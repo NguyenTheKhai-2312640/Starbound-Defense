@@ -18,7 +18,7 @@ public class PlayerArmor : MonoBehaviour
     public UnityEvent OnDamaged;
     public UnityEvent OnHealthChanged;
 
-    public float RemainingHealthPercentage
+    public float RemainingArmorPercentage
     {
         get
         {
@@ -79,14 +79,16 @@ public class PlayerArmor : MonoBehaviour
         OnHealthChanged.Invoke();
     }
 
-    public void AddHealth(float amountToAdd)
+    public void AddArmor(float amountToAdd)
     {
         if (currentArmor == maxArmor)
         {
             return;
         }
+
         currentArmor += amountToAdd;
         OnHealthChanged.Invoke();
+
         if
         (currentArmor > maxArmor)
             currentArmor = maxArmor;

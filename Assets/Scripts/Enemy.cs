@@ -4,18 +4,24 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 2f;
-    [SerializeField] private float enemyDamage = 1;
+    [SerializeField] private float enemyScore = 0;
     [SerializeField] private float maxEnemyHealth;
     [SerializeField] private float currentEnemyHealth;
 
-    [SerializeField] private Transform place;
+    private ScoreSystem scoreSystem;
+    private ItemDrop itemDrop;
+
+    private Transform place;
 
     private Rigidbody2D rb;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        scoreSystem = FindFirstObjectByType<ScoreSystem>();
+        itemDrop = FindFirstObjectByType<ItemDrop>();
         place = GameObject.FindGameObjectWithTag("Safeplace").transform;
     }
 
@@ -25,7 +31,7 @@ public class Enemy : MonoBehaviour
         Vector2 direction = (place.position - transform.position).normalized;
         rb.linearVelocity = direction * moveSpeed;
         // transform.position = Vector2.MoveTowards(transform.position, place.position, moveSpeed * Time.deltaTime);
-        
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -39,7 +45,7 @@ public class Enemy : MonoBehaviour
         {
             collision.gameObject
                 .GetComponent<Health>()
-                .TakeDamage(enemyDamage);
+                .TakeDamage(1);
 
             Destroy(collision.gameObject); // hủy player
         }
@@ -56,6 +62,16 @@ public class Enemy : MonoBehaviour
 
         if (currentEnemyHealth <= 0)
         {
+            if (scoreSystem != null)
+            {
+                scoreSystem.AddScore(enemyScore);
+            }
+
+            if (itemDrop != null)
+            {
+                itemDrop.TryDropItem();
+            }
+
             Destroy(gameObject);
         }
     }

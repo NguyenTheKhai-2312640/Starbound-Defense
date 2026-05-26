@@ -9,7 +9,7 @@ public class PlayerShooter : MonoBehaviour
     [SerializeField] private Transform rotationPoint;
     [SerializeField] private Transform gunOffset;
     [SerializeField] private float timeBetweenShots;
-    [SerializeField] private bool canShoot;
+    [SerializeField] public bool canShoot;
 
     private Camera mainCam;
     private Vector3 mousePos;

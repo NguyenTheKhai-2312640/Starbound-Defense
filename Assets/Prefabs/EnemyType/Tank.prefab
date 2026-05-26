@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7673114486132497014}
   - component: {fileID: 2830248214439696874}
   - component: {fileID: 9128317373201067648}
+  - component: {fileID: 7806280858947105930}
   m_Layer: 8
   m_Name: Tank
   m_TagString: Enemy
@@ -178,10 +179,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.25
-  enemyDamage: 1
+  enemyScore: 10
   maxEnemyHealth: 100
   currentEnemyHealth: 100
-  place: {fileID: 0}
 --- !u!114 &2830248214439696874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,3 +208,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 5
+--- !u!114 &7806280858947105930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5070562871364067835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524999d8f7e0cba41977ec02a1b094c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  armorPickupPrefab: {fileID: 7412605664198173866, guid: 95bde4410132dd0459268d7ae45a6f7a, type: 3}
+  coinPickupPrefab: {fileID: 8881823529071908698, guid: d1430748b08db68428ea606c5f3fe789, type: 3}
+  armorDropChance: 0.2
+  coinDropChance: 0.6

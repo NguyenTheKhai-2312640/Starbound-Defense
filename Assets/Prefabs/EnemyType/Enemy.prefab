@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6101962522208326922}
   - component: {fileID: 5734439554173499349}
   - component: {fileID: 3439813921084774055}
+  - component: {fileID: 1888474091135316338}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
@@ -178,10 +179,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.5
-  enemyDamage: 1
+  enemyScore: 3
   maxEnemyHealth: 30
   currentEnemyHealth: 30
-  place: {fileID: 0}
 --- !u!114 &5734439554173499349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,3 +208,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 2
+--- !u!114 &1888474091135316338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6799207201554951997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524999d8f7e0cba41977ec02a1b094c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  armorPickupPrefab: {fileID: 7412605664198173866, guid: 95bde4410132dd0459268d7ae45a6f7a, type: 3}
+  coinPickupPrefab: {fileID: 8881823529071908698, guid: d1430748b08db68428ea606c5f3fe789, type: 3}
+  armorDropChance: 0.2
+  coinDropChance: 0.6
