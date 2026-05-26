@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 2921592639795431944}
   - component: {fileID: 6107891336355051599}
   - component: {fileID: -2600233625082620411}
+  - component: {fileID: 5584408241306192476}
   m_Layer: 8
   m_Name: Shooter
   m_TagString: Enemy
@@ -211,10 +212,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.5
-  enemyDamage: 1
+  enemyScore: 2
   maxEnemyHealth: 20
   currentEnemyHealth: 20
-  place: {fileID: 0}
 --- !u!114 &2921592639795431944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0f73bfb08a2344fae4944a2c4597b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 2
+  damageAmount: 5
 --- !u!114 &6107891336355051599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,3 +255,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 3100985172970668413, guid: 379644c5ba4517b459762e6eb18c3eb7, type: 3}
   bulletPos: {fileID: 5621705367279044102}
+--- !u!114 &5584408241306192476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9137030898422080984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524999d8f7e0cba41977ec02a1b094c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  armorPickupPrefab: {fileID: 7412605664198173866, guid: 95bde4410132dd0459268d7ae45a6f7a, type: 3}
+  coinPickupPrefab: {fileID: 8881823529071908698, guid: d1430748b08db68428ea606c5f3fe789, type: 3}
+  armorDropChance: 0.2
+  coinDropChance: 0.6

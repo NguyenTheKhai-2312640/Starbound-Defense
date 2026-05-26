@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIUpdater : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class UIUpdater : MonoBehaviour
     private Image currentHealthBarImage;
     [SerializeField]
     private Image currentArmorBarImage;
+    [SerializeField] 
+    private TextMeshProUGUI coinText;
 
     public void UpdateHealthBar(Health health)
     {
@@ -15,6 +18,11 @@ public class UIUpdater : MonoBehaviour
 
     public void UpdateArmorBar(PlayerArmor playerArmor)
     {
-        currentArmorBarImage.fillAmount = playerArmor.RemainingHealthPercentage;
+        currentArmorBarImage.fillAmount = playerArmor.RemainingArmorPercentage;
+    }
+
+    public void UpdateCoinUI(MoneyManager moneyManager)
+    {
+        coinText.text = moneyManager.RemainingCoinPercentage.ToString();
     }
 }
