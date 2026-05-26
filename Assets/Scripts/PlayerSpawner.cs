@@ -1,10 +1,8 @@
 using UnityEngine;
-using TMPro;
 using System.Collections;
 
 public class PlayerSpawner : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI timeText;
     [SerializeField] private float coolDownTime;
     [SerializeField] private Vector2 startPos;
     [SerializeField] private GameObject playerSprite;
@@ -24,7 +22,6 @@ public class PlayerSpawner : MonoBehaviour
     void Start()
     {
         startPos = transform.position;
-        timeText.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -47,9 +44,6 @@ public class PlayerSpawner : MonoBehaviour
 
         isRespawning = true;
 
-        // hiện text khi chết
-        timeText.gameObject.SetActive(true);
-
         // turn off player
         playerRb.linearVelocity = Vector2.zero;
         playerRb.simulated = false;
@@ -67,9 +61,6 @@ public class PlayerSpawner : MonoBehaviour
         // turn on player
         playerRb.simulated = true;
         transform.localScale = Vector3.one;
-
-        // ẩn text
-        timeText.gameObject.SetActive(false);
 
         isRespawning = false;
         respawnCoroutine = null;
