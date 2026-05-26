@@ -1,177 +1,158 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using UnityEngine.Audio;
 
 public class SettingsManager : MonoBehaviour
 {
     [Header("Volume")]
     public Slider masterVolumeSlider;
     public Slider musicVolumeSlider;
+    public AudioMixer audioMixer;
 
     [Header("Screen")]
-    public TMP_Dropdown screenDropdown;
+    public TMP_Dropdown screenDropdown;   // 
     public TMP_Dropdown resolutionDropdown;
+
+    // --- Lưu tạm cài đặt chưa save ---
+    private float tempMasterVolume;
+    private float tempMusicVolume;
+    private int tempScreenMode;
+    private int tempResolutionIndex;
 
     private Resolution[] resolutions;
 
     void Start()
     {
         // ===== LOAD MASTER VOLUME =====
-        float masterVolume =
-            PlayerPrefs.GetFloat("MasterVolume", 1f);
-
+        float masterVolume = PlayerPrefs.GetFloat("MasterVolume", 1f);
         masterVolumeSlider.value = masterVolume;
-
+        tempMasterVolume = masterVolume;
         AudioListener.volume = masterVolume;
 
         // ===== LOAD MUSIC VOLUME =====
-        float musicVolume =
-            PlayerPrefs.GetFloat("MusicVolume", 1f);
-
+        float musicVolume = PlayerPrefs.GetFloat("MusicVolume", 1f);
         musicVolumeSlider.value = musicVolume;
-        GameObject musicObj = GameObject.Find("MusicManager");
-
-if (musicObj != null)
-{
-    AudioSource music = musicObj.GetComponent<AudioSource>();
-    music.volume = musicVolume;
-}
+        tempMusicVolume = musicVolume;
+        ApplyMusicVolume(musicVolume);
 
         // ===== SCREEN MODE =====
         screenDropdown.ClearOptions();
-
-        screenDropdown.AddOptions(
-            new System.Collections.Generic.List<string>()
-            {
-                "Fullscreen",
-                "Windowed"
-            }
-        );
-
-        int screenMode =
-            PlayerPrefs.GetInt("ScreenMode", 0);
-
+        screenDropdown.AddOptions(new List<string> { "Fullscreen", "Windowed" });
+        int screenMode = PlayerPrefs.GetInt("ScreenMode", 0);
         screenDropdown.value = screenMode;
-
+        tempScreenMode = screenMode;
         ApplyScreenMode(screenMode);
-         // ===== RESOLUTION =====
-       resolutions = Screen.resolutions;
 
-resolutionDropdown.ClearOptions();
+        // ===== RESOLUTION =====
+        resolutions = Screen.resolutions;
+        resolutionDropdown.ClearOptions();
 
-List<string> options = new List<string>();
+        List<string> options = new List<string>();
+        int currentResolutionIndex = 0;
 
-int currentResolutionIndex = 0;
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            string option = resolutions[i].width + " x " + resolutions[i].height;
+            options.Add(option);
 
-for (int i = 0; i < resolutions.Length; i++)
-{
-    string option =
-        resolutions[i].width + " x " +
-        resolutions[i].height;
+            if (resolutions[i].width == Screen.currentResolution.width &&
+                resolutions[i].height == Screen.currentResolution.height)
+            {
+                currentResolutionIndex = i;
+            }
+        }
 
-    options.Add(option);
-
-    if (resolutions[i].width ==
-        Screen.currentResolution.width &&
-        resolutions[i].height ==
-        Screen.currentResolution.height)
-    {
-        currentResolutionIndex = i;
+        // Ưu tiên chỉ số đã lưu, nếu có
+        int savedResolution = PlayerPrefs.GetInt("Resolution", currentResolutionIndex);
+        resolutionDropdown.AddOptions(options);
+        resolutionDropdown.value = savedResolution;
+        resolutionDropdown.RefreshShownValue();
+        tempResolutionIndex = savedResolution;
     }
-}
-
-resolutionDropdown.AddOptions(options);
-
-resolutionDropdown.value = currentResolutionIndex;
-
-resolutionDropdown.RefreshShownValue();
-    
-    }
-    
 
     // =========================
-    // MASTER VOLUME
+    // CÁC HÀM CHỈ LƯU TẠM
+    // (gắn vào OnValueChanged của từng UI)
     // =========================
-    public void SetMasterVolume(float volume)
+    public void OnMasterVolumeChanged(float volume)
     {
-        AudioListener.volume = volume;
+        tempMasterVolume = volume;
+        AudioListener.volume = volume; // Preview ngay
+    }
 
-        PlayerPrefs.SetFloat(
-            "MasterVolume",
-            volume
-        );
+    public void OnMusicVolumeChanged(float volume)
+    {
+        tempMusicVolume = volume;
+        ApplyMusicVolume(volume);  // preview ngay khi kéo slider
+    }
+
+
+    public void OnScreenModeChanged(int mode)
+    {
+        tempScreenMode = mode;
+        ApplyScreenMode(mode); // Preview ngay
+    }
+
+    public void OnResolutionChanged(int index)
+    {
+        tempResolutionIndex = index;
+        // Preview ngay nếu muốn:
+        // Resolution r = resolutions[index];
+        // Screen.SetResolution(r.width, r.height, Screen.fullScreen);
+    }
+
+    // =========================
+    // NÚT SAVE — ghi tất cả vào PlayerPrefs
+    // (gắn hàm này vào Button Save)
+    // =========================
+    public void SaveSettings()
+    {
+        PlayerPrefs.SetFloat("MasterVolume", tempMasterVolume);
+        PlayerPrefs.SetFloat("MusicVolume", tempMusicVolume);
+        PlayerPrefs.SetInt("ScreenMode", tempScreenMode);
+        PlayerPrefs.SetInt("Resolution", tempResolutionIndex);
         PlayerPrefs.Save();
+
+        // Áp dụng resolution khi save
+        Resolution r = resolutions[tempResolutionIndex];
+        Screen.SetResolution(r.width, r.height, Screen.fullScreen);
+
+        Debug.Log("✅ Đã lưu cài đặt!");
     }
 
     // =========================
-    // MUSIC VOLUME
+    // HÀM PHỤ TRỢ
     // =========================
-public void SetMusicVolume(float volume)
+    void ApplyMusicVolume(float volume)
 {
-    GameObject musicObj =
-        GameObject.Find("MusicManager");
-
+    // Tìm trực tiếp AudioSource trên MusicManager
+    GameObject musicObj = GameObject.Find("MusicManager");
+    
     if (musicObj != null)
     {
-        AudioSource music =
-            musicObj.GetComponent<AudioSource>();
-
-        music.volume = volume;
-    }
-
-    PlayerPrefs.SetFloat("MusicVolume", volume);
-    PlayerPrefs.Save();
-}
-
-    // =========================
-    // SCREEN MODE
-    // =========================
-    public void SetScreenMode(int mode)
-    {
-        ApplyScreenMode(mode);
-
-        PlayerPrefs.SetInt(
-            "ScreenMode",
-            mode
-        );
-        PlayerPrefs.Save();
-    }
-
-    void ApplyScreenMode(int mode)
-    {
-        if (mode == 0)
+        AudioSource music = musicObj.GetComponent<AudioSource>();
+        if (music != null)
         {
-            // Fullscreen
-            Screen.fullScreenMode =
-                FullScreenMode.FullScreenWindow;
+            music.volume = volume;
+            Debug.Log("✅ Đã set volume = " + volume);
         }
         else
         {
-            // Windowed
-            Screen.fullScreenMode =
-                FullScreenMode.Windowed;
+            Debug.LogError("❌ Không tìm thấy AudioSource!");
         }
-        PlayerPrefs.Save();
     }
-    public void SetResolution(int resolutionIndex)
-{
-    Resolution resolution =
-        resolutions[resolutionIndex];
-
-    Screen.SetResolution(
-        resolution.width,
-        resolution.height,
-        Screen.fullScreen
-    );
-
-    PlayerPrefs.SetInt(
-        "Resolution",
-        resolutionIndex
-    );
-
-    PlayerPrefs.Save();
+    else
+    {
+        Debug.LogError("❌ Không tìm thấy MusicManager!");
+    }
 }
+
+    void ApplyScreenMode(int mode)
+    {
+        Screen.fullScreenMode = (mode == 0)
+            ? FullScreenMode.FullScreenWindow
+            : FullScreenMode.Windowed;
+    }
 }
