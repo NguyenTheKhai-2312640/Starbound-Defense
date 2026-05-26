@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
@@ -34,11 +33,11 @@ public class SettingsManager : MonoBehaviour
         musicVolumeSlider.value = musicVolume;
         GameObject musicObj = GameObject.Find("MusicManager");
 
-if (musicObj != null)
-{
-    AudioSource music = musicObj.GetComponent<AudioSource>();
-    music.volume = musicVolume;
-}
+        if (musicObj != null)
+        {
+            AudioSource music = musicObj.GetComponent<AudioSource>();
+            music.volume = musicVolume;
+        }
 
         // ===== SCREEN MODE =====
         screenDropdown.ClearOptions();
@@ -57,40 +56,40 @@ if (musicObj != null)
         screenDropdown.value = screenMode;
 
         ApplyScreenMode(screenMode);
-         // ===== RESOLUTION =====
-       resolutions = Screen.resolutions;
+        // ===== RESOLUTION =====
+        resolutions = Screen.resolutions;
 
-resolutionDropdown.ClearOptions();
+        resolutionDropdown.ClearOptions();
 
-List<string> options = new List<string>();
+        List<string> options = new List<string>();
 
-int currentResolutionIndex = 0;
+        int currentResolutionIndex = 0;
 
-for (int i = 0; i < resolutions.Length; i++)
-{
-    string option =
-        resolutions[i].width + " x " +
-        resolutions[i].height;
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            string option =
+                resolutions[i].width + " x " +
+                resolutions[i].height;
 
-    options.Add(option);
+            options.Add(option);
 
-    if (resolutions[i].width ==
-        Screen.currentResolution.width &&
-        resolutions[i].height ==
-        Screen.currentResolution.height)
-    {
-        currentResolutionIndex = i;
+            if (resolutions[i].width ==
+                Screen.currentResolution.width &&
+                resolutions[i].height ==
+                Screen.currentResolution.height)
+            {
+                currentResolutionIndex = i;
+            }
+        }
+
+        resolutionDropdown.AddOptions(options);
+
+        resolutionDropdown.value = currentResolutionIndex;
+
+        resolutionDropdown.RefreshShownValue();
+
     }
-}
 
-resolutionDropdown.AddOptions(options);
-
-resolutionDropdown.value = currentResolutionIndex;
-
-resolutionDropdown.RefreshShownValue();
-    
-    }
-    
 
     // =========================
     // MASTER VOLUME
@@ -109,22 +108,22 @@ resolutionDropdown.RefreshShownValue();
     // =========================
     // MUSIC VOLUME
     // =========================
-public void SetMusicVolume(float volume)
-{
-    GameObject musicObj =
-        GameObject.Find("MusicManager");
-
-    if (musicObj != null)
+    public void SetMusicVolume(float volume)
     {
-        AudioSource music =
-            musicObj.GetComponent<AudioSource>();
+        GameObject musicObj =
+            GameObject.Find("MusicManager");
 
-        music.volume = volume;
+        if (musicObj != null)
+        {
+            AudioSource music =
+                musicObj.GetComponent<AudioSource>();
+
+            music.volume = volume;
+        }
+
+        PlayerPrefs.SetFloat("MusicVolume", volume);
+        PlayerPrefs.Save();
     }
-
-    PlayerPrefs.SetFloat("MusicVolume", volume);
-    PlayerPrefs.Save();
-}
 
     // =========================
     // SCREEN MODE
@@ -157,21 +156,21 @@ public void SetMusicVolume(float volume)
         PlayerPrefs.Save();
     }
     public void SetResolution(int resolutionIndex)
-{
-    Resolution resolution =
-        resolutions[resolutionIndex];
+    {
+        Resolution resolution =
+            resolutions[resolutionIndex];
 
-    Screen.SetResolution(
-        resolution.width,
-        resolution.height,
-        Screen.fullScreen
-    );
+        Screen.SetResolution(
+            resolution.width,
+            resolution.height,
+            Screen.fullScreen
+        );
 
-    PlayerPrefs.SetInt(
-        "Resolution",
-        resolutionIndex
-    );
+        PlayerPrefs.SetInt(
+            "Resolution",
+            resolutionIndex
+        );
 
-    PlayerPrefs.Save();
-}
+        PlayerPrefs.Save();
+    }
 }

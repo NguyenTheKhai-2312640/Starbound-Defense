@@ -29,7 +29,7 @@ public class MoneyManager : MonoBehaviour
     public void AddCoins(float coinAmount)
     {
         currentCoins += coinAmount;
-        Debug.Log(currentCoins);
+        //Debug.Log(currentCoins);
         uiUpdater.UpdateCoinUI(this);
     }
 }

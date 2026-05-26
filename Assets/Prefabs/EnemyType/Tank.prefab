@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dbf547d2499a6a4b8316865de793cea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.25
+  moveSpeed: 0.2
   enemyScore: 10
   maxEnemyHealth: 100
   currentEnemyHealth: 100
@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2493e41639ba2d41aaf9e06f0a33238, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 5
+  damageAmount: 10
 --- !u!114 &7806280858947105930
 MonoBehaviour:
   m_ObjectHideFlags: 0

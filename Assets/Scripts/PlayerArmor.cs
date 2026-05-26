@@ -12,7 +12,7 @@ public class PlayerArmor : MonoBehaviour
     private PlayerSpawner playerSpawner;
 
     public bool IsInvincible { get; set; }
-    private bool isBroken = false;
+    public bool isBroken = false;
 
     public UnityEvent OnDied;
     public UnityEvent OnDamaged;
@@ -50,19 +50,19 @@ public class PlayerArmor : MonoBehaviour
         {
             isBroken = true;
 
-            //OnDied.Invoke();
+            // OnDied.Invoke();
 
-            Debug.Log("PLAYER DIED");
+            // Debug.Log("PLAYER DIED");    
 
             if (playerSpawner != null)
             {
                 playerSpawner.RespawnPlayer();
             }
-            else
-            {
-                Debug.LogWarning("PlayerSpawn is NULL");
-            }
-            Debug.Log("PLACE START");
+            // else
+            // {
+            //     Debug.LogWarning("PlayerSpawn is NULL");
+            // }
+            // Debug.Log("Respawn START");
 
         }
         else

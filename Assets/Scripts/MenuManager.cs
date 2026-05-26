@@ -38,9 +38,26 @@ public class MenuManager : MonoBehaviour
         GameManager.gameEnded = false;
     }
 
+    [Header("Upgrade UI Panels")]
+    [SerializeField] private GameObject upgradePanel;
+    public void UpgradeActive()
+    {
+        Time.timeScale = 0;
+        upgradePanel.SetActive(true);
+        GameManager.isPaused = true;
+    }
+
+    public void UpgradeBack()
+    {
+        Time.timeScale = 1;
+        upgradePanel.SetActive(false);
+        GameManager.isPaused = false;
+    }
+
     [Header("MainMenu UI Panels")]
     // Main menu
     [SerializeField] private GameObject creditPanel;
+    [SerializeField] private GameObject helpPanel;
     public GameObject mainMenuPanel;
     public GameObject settingsPanel;
     public void NewGame()
@@ -49,11 +66,21 @@ public class MenuManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    public void OpenHelp()
+    {
+        helpPanel.SetActive(true);
+    }
+
+    public void CloseHelp()
+    {
+        helpPanel.SetActive(false);
+    }
+
     public void Setting()
     {
 
     }
-     public void OpenSettings()
+    public void OpenSettings()
     {
         mainMenuPanel.SetActive(false);
         settingsPanel.SetActive(true);

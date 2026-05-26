@@ -8,6 +8,15 @@ public class ItemPickup : MonoBehaviour
     [SerializeField] private PickupType type;
     [SerializeField] private float itemAmount;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip coinsSFX;
+    private AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
@@ -21,11 +30,14 @@ public class ItemPickup : MonoBehaviour
             else if (type == PickupType.Coin)
             {
                 collision.gameObject.GetComponent<MoneyManager>().AddCoins(itemAmount);
-                Destroy(gameObject);
+
+                // play sound FX
+                audioSource.clip = coinsSFX;
+                audioSource.Play();
+                
+                Destroy(gameObject, coinsSFX.length);
             }
 
         }
     }
-
-
 }

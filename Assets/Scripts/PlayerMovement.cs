@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Animator animator;
     private Rigidbody2D rb;
     private Vector2 moveDirection;
+    private Camera mainCam;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -15,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         // Không cho xoay
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        mainCam = Camera.main;
     }
 
     // Update is called once per frame
@@ -28,6 +30,11 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         rb.linearVelocity = moveDirection * moveSpeed;
+    }
+
+    void LateUpdate()
+    {
+        ClampPosition();
     }
 
     private void FlipCharacterX()
@@ -52,5 +59,16 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("isMoving", false);
         }
+    }
+
+    private void ClampPosition()
+    {
+        //ngăn player ra khi màn hình
+        Vector3 viewPos = mainCam.WorldToViewportPoint(transform.position);
+
+        viewPos.x = Mathf.Clamp(viewPos.x, 0.05f, 0.95f);
+        viewPos.y = Mathf.Clamp(viewPos.y, 0.05f, 0.95f);
+
+        transform.position = mainCam.ViewportToWorldPoint(viewPos);
     }
 }

@@ -4,12 +4,18 @@ using UnityEngine.EventSystems;
 
 public class PlayerShooter : MonoBehaviour
 {
+    [Header("Audio")]
+    [SerializeField] private AudioClip shootSFX;
+    private AudioSource audioSource;
+
+    [Header("Feature")]
     [SerializeField] private float bulletSpeed;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform rotationPoint;
     [SerializeField] private Transform gunOffset;
     [SerializeField] private float timeBetweenShots;
     [SerializeField] public bool canShoot;
+    [SerializeField] private PlayerArmor playerArmor;
 
     private Camera mainCam;
     private Vector3 mousePos;
@@ -19,6 +25,7 @@ public class PlayerShooter : MonoBehaviour
     void Start()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -26,6 +33,10 @@ public class PlayerShooter : MonoBehaviour
     {
         // Không cho xử lý khi pause
         if (GameManager.isPaused)
+            return;
+
+        // Không cho bắn khi chết
+        if (playerArmor != null && playerArmor.isBroken)
             return;
 
         // Gun offset
@@ -51,6 +62,12 @@ public class PlayerShooter : MonoBehaviour
             GameObject bullet = Instantiate(bulletPrefab, gunOffset.position, rotationPoint.rotation);
 
             bullet.GetComponent<BulletScript>().SetSpeed(bulletSpeed);
+
+
+            //play sound FX
+            // audioSource.clip = shootSFX;
+            // audioSource.Play();
+            audioSource.PlayOneShot(shootSFX);
         }
     }
 }
