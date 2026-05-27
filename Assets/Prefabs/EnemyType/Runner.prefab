@@ -33,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.04, y: 0.03, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -82,8 +82,8 @@ SpriteRenderer:
   m_SortingLayerID: 1251659963
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.15485935, g: 0.19674613, b: 0.8207547, a: 1}
+  m_Sprite: {fileID: -2343693395358084441, guid: 1bb4fb26c99ab5d4b880086e704a63ee, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -154,17 +154,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.09366432}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 2.5, y: 2.87}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 1.7710972}
   m_EdgeRadius: 0
 --- !u!114 &7770376179203183252
 MonoBehaviour:
@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dbf547d2499a6a4b8316865de793cea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  moveSpeed: 2.5
   enemyScore: 1
   maxEnemyHealth: 10
   currentEnemyHealth: 10
@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0f73bfb08a2344fae4944a2c4597b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 5
+  damageAmount: 10
 --- !u!114 &6298450300215770086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2493e41639ba2d41aaf9e06f0a33238, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 1
+  damageAmount: 10
 --- !u!114 &7753245272345294892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,5 +222,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   armorPickupPrefab: {fileID: 7412605664198173866, guid: 95bde4410132dd0459268d7ae45a6f7a, type: 3}
   coinPickupPrefab: {fileID: 8881823529071908698, guid: d1430748b08db68428ea606c5f3fe789, type: 3}
-  armorDropChance: 0.2
-  coinDropChance: 0.6
+  armorDropChance: 0.1
+  coinDropChance: 0.3

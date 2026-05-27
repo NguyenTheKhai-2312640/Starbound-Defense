@@ -9758,7 +9758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 7591947878384323472, guid: 670939e87580c2c45bfc521507455730, type: 3}
-  spawnRate: 8
+  spawnRate: 4
   spawnDistance: 10
   timeSinceLastSpawn: 0
 --- !u!114 &1961287350
@@ -9774,7 +9774,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 5070562871364067835, guid: 4ccbab5b90dd0b34a96ca9919ccc77d1, type: 3}
-  spawnRate: 32
+  spawnRate: 24
   spawnDistance: 10
   timeSinceLastSpawn: 0
 --- !u!114 &1961287351
@@ -9790,7 +9790,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 9137030898422080984, guid: 660df3efb8e5ad844be5dc2449e34871, type: 3}
-  spawnRate: 16
+  spawnRate: 8
   spawnDistance: 10
   timeSinceLastSpawn: 0
 --- !u!114 &1961287352
@@ -9806,7 +9806,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 4078887804921872278, guid: 17b0c51d1b01f114ea9e486958a92adb, type: 3}
-  spawnRate: 180
+  spawnRate: 150
   spawnDistance: 12
   timeSinceLastSpawn: 0
 --- !u!1 &1974514575
